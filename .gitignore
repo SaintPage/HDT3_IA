@@ -1,0 +1,17 @@
+# Secretos - CRITICO: nunca subir API Keys
+.env
+*.key
+secrets/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Editores / SO
+.vscode/
+.idea/
+.DS_Store
