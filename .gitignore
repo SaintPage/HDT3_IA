@@ -1,4 +1,3 @@
-# Secretos - CRITICO: nunca subir API Keys
 .env
 *.key
 secrets/

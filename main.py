@@ -30,9 +30,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from openai import OpenAI, OpenAIError
 
-# --------------------------------------------------------------------------
 # Configuracion (la API Key NUNCA se escribe en el codigo: viene del .env)
-# --------------------------------------------------------------------------
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -42,7 +40,7 @@ KB_PATH = Path(
 
 API_KEY = os.getenv("OPENAI_API_KEY")
 BASE_URL = os.getenv("OPENAI_BASE_URL", "https://api.groq.com/openai/v1")
-MODEL = os.getenv("MODEL", "llama-3.3-70b-versatile")
+MODEL = os.getenv("MODEL", "openai/gpt-oss-120b")
 TEMPERATURE = float(os.getenv("TEMPERATURE", "0.1"))
 MAX_HISTORY = 12  # ultimos N mensajes de la conversacion que se reenvian
 
@@ -86,11 +84,9 @@ BANNER = """
 """
 
 
-# --------------------------------------------------------------------------
 # Capa de "retrieval": en esta arquitectura minima el documento completo es
 # el contexto recuperado. Se aisla en una funcion para poder sustituirla
 # luego por busqueda semantica / vector store sin tocar el resto del codigo.
-# --------------------------------------------------------------------------
 def cargar_base_conocimiento(ruta: Path) -> str:
     if not ruta.is_file():
         sys.exit(
@@ -126,9 +122,7 @@ def preguntar(cliente: OpenAI, mensajes: list[dict]) -> str:
     return respuesta.choices[0].message.content.strip()
 
 
-# --------------------------------------------------------------------------
 # Loop principal: multiples preguntas en una sola sesion
-# --------------------------------------------------------------------------
 def main() -> None:
     contexto = cargar_base_conocimiento(KB_PATH)
     cliente = crear_cliente()
