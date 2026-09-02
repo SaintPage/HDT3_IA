@@ -84,3 +84,6 @@ parachute-rag/
 ├── .gitignore
 └── README.md
 ```
+## Enlace al vídeo:
+
+https://youtu.be/TZUrX6D1sAY
